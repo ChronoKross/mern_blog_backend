@@ -9,11 +9,18 @@ const categoriesRoute = require("./routes/categories");
 const multer = require("multer");
 const path = require("path");
 const port = process.env.PORT || "5000"; //test
+//
+const cors = require('cors');
 
 dotenv.config();
 app.use(express.json());
 app.use("/images", express.static(path.join(__dirname, "/images")));
-
+//
+app.use(cors({
+  origin: 'https://thedailyescape.onrender.com',
+  methods: ['GET', 'POST', 'DELETE', 'PUT']
+}));
+//
 mongoose
   .connect(process.env.MONGO_URL)
   .then(console.log("Connected to MONGODB"))
